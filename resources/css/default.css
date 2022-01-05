@@ -1,0 +1,11 @@
+*::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    @apply bg-gray-800 rounded-full hover:bg-gray-600;
+}
+
+*::selection {
+    @apply text-white bg-gray-800;
+}

@@ -1,37 +1,63 @@
 <template>
-    <div class="flex items-center justify-between px-10 py-6 border-b">
-        <div class="text-4xl font-semibold" v-html="title" />
+    <div class="flex items-center justify-between px-10 py-6 border-b dark:border-gray-800">
+        <div class="text-4xl font-semibold dark:text-white" v-html="title" />
 
-        <div class="flex space-x-6">
-            <div>
-                <button class="p-3 bg-gray-200 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
-                    </svg>
-                </button>
+        <button @click="toggleMode()" class="flex items-center space-x-4 group">
+            <div :class="mode == 'dark' ? 'text-black bg-gray-200' : 'text-white bg-gray-800'" class="p-3 transition rounded-full group-active:hover:scale-90">
+                <svg v-if="mode == 'dark'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             </div>
-
-            <div>
-                <button class="overflow-hidden rounded-full">
-                    <img class="w-10 h-10" src="https://ui-avatars.com/api/?name=Alice+Evergarden&color=ffffff&background=252525&format=svg">
-                </button>
+            <div :class="mode == 'dark' ? 'text-gray-200' : 'text-gray-800'" class="font-semibold">
+                {{ mode == 'dark' ? 'Dark' : 'Light' }}
             </div>
-        </div>
+        </button>
     </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { InertiaLink } from '@inertiajs/inertia-vue3'
 
 export default defineComponent({
-    components: {
-        InertiaLink
-    },
-
     props: {
         title: String
+    },
+
+    data() {
+        return {
+            mode: localStorage.getItem('mode'),
+        }
+    },
+
+    mounted() {
+        if (this.mode == 'dark') {
+            document.querySelector('html').classList.add('dark')
+        } else {
+            document.querySelector('html').classList.remove("dark")
+        }
+    },
+
+    methods: {
+        toggleMode() {
+            if (this.mode == 'dark') {
+                this.mode = 'light'
+            } else {
+                this.mode = 'dark'
+            }
+        }
+    },
+
+    watch: {
+        mode: {
+            handler() {
+                localStorage.setItem('mode', this.mode)
+
+                if (localStorage.getItem('mode') == 'dark') {
+                    document.querySelector('html').classList.add('dark')
+                } else {
+                    document.querySelector('html').classList.remove("dark")
+                }
+            }
+        }
     }
 })
 </script>

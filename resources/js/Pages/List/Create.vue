@@ -6,45 +6,38 @@
     <modal trigger="Create new" title="Create New Data" @close="closeModal" :show="isOpen">
         <div class="mt-8 space-y-2">
             <div>
-                <label class="block text-sm font-medium text-gray-700">Item</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Item</label>
                 <v-select v-model="form.item" :filterable="false" @search="searchItem" multiple :reduce="item => item.id" :options="item" label="name" class="mt-1">
                     <template v-slot:option="{name, description}">
                         <div>{{ name }}</div>
-                        <cite>{{ description }}</cite>
+                        <div class="text-xs opacity-50">{{ description }}</div>
                     </template>
                 </v-select>
                 <input-error :message="form.errors.item" class="mt-1" />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">Borrower</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Borrower</label>
                 <v-select v-model="form.borrower" :filterable="false" @search="searchBorrower" :reduce="borrower => borrower.id" :options="borrower" label="name" class="mt-1">
                     <template v-slot:option="{name, email}">
                         <div>{{ name }}</div>
-                        <cite>{{ email }}</cite>
+                        <div class="text-xs opacity-50">{{ email }}</div>
                     </template>
                 </v-select>
                 <input-error :message="form.errors.borrower" class="mt-1" />
             </div>
 
             <div>
-
-            </div>
-
-            <div>
-                <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                <textarea v-model="form.note" id="note" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm" />
+                <label for="note" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Note</label>
+                <textarea v-model="form.note" id="note" class="block w-full px-4 py-2 mt-1 transition bg-gray-100 border border-gray-200 focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white" />
                 <input-error :message="form.errors.note" class="mt-1" />
             </div>
         </div>
 
-        <div class="flex items-center mt-8 space-x-4">
-            <button @click="store" type="button" :disabled="form.processing" :class="{'opacity-25': form.processing}" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500">
+        <div class="mt-8">
+            <button @click="store" type="button" :disabled="form.processing" :class="{'opacity-25': form.processing}" class="px-4 py-2 text-white transition bg-gray-800 rounded-xl active:hover:scale-95">
                 Create
             </button>
-            <div v-if="form.progress" class="text-xs text-gray-500">
-                {{form.progress.percentage}}%
-            </div>
         </div>
     </modal>
 </template>
@@ -54,7 +47,6 @@ import { defineComponent, ref } from 'vue'
 import Modal from '@/Shared/Component/Modal'
 import InputError from '@/Shared/Component/InputError'
 import VSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css'
 import axios from 'axios'
 
 export default defineComponent({

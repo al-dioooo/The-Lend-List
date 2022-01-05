@@ -17,11 +17,11 @@ class BorrowerSeeder extends Seeder
     {
         $borrower = [
             [
-                'name' => 'Farras Amelia Hasna',
-                'email' => 'farrasamelia@gmail.com',
+                'name' => 'Manusia',
+                'email' => 'manusia@gmail.com',
                 'organization' => 'Lovers',
                 'contact' => '+62-895-1811-8820',
-                'address' => "Aldio's Heart",
+                'address' => "Unknown",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -31,7 +31,7 @@ class BorrowerSeeder extends Seeder
                 'email' => 'lisafronaldio123@gmail.com',
                 'organization' => 'Wideplay',
                 'contact' => '+62-895-1811-8820',
-                'address' => "Farras's Heart",
+                'address' => "Unknown",
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],

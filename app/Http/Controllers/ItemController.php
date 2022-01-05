@@ -15,11 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $item = Item::filter(request()->only('search', 'trashed'))->latest()->paginate(10)->withQueryString();
-
-        // if (request('search')) {
-        //     $item = Item::where('name', 'like', '%' . request('search') . '%')->orWhere('description', 'like', '%' . request('search') . '%')->paginate(10)->withQueryString();
-        // }
+        $item = Item::filter(request()->only('search', 'trashed'))->latest()->paginate(20)->withQueryString();
 
         $data = [
             'datasheet' => $item,
@@ -27,16 +23,6 @@ class ItemController extends Controller
         ];
 
         return Inertia::render('Item/Index', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -65,28 +51,6 @@ class ItemController extends Controller
         $item->save();
 
         return redirect()->back()->with('message', 'Successfully created ' . $item->name . '!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

@@ -1,18 +1,218 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reset */
+@import 'tailwindcss/base';
+@import 'default';
 
-*::-webkit-scrollbar {
-    width: .3rem;
+/* Components */
+@import 'tailwindcss/components';
+
+/* Utilities */
+@import 'tailwindcss/utilities';
+
+/* Vue Select */
+
+.v-select {
+    position: relative;
+    font-family: inherit;
 }
-
-*::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    @apply bg-gray-800 hover:bg-gray-600
+.v-select,
+.v-select * {
+    box-sizing: border-box;
 }
-
-*::selection {
-    @apply bg-gray-800 text-white
+@-webkit-keyframes vSelectSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+@keyframes vSelectSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+.vs__fade-enter-active,
+.vs__fade-leave-active {
+    pointer-events: none;
+    transition: opacity 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.vs__fade-enter,
+.vs__fade-leave-to {
+    opacity: 0;
+}
+.vs--disabled .vs__clear,
+.vs--disabled .vs__dropdown-toggle,
+.vs--disabled .vs__open-indicator,
+.vs--disabled .vs__search,
+.vs--disabled .vs__selected {
+    cursor: not-allowed;
+    background-color: #f8f8f8;
+}
+.v-select[dir="rtl"] .vs__actions {
+    padding: 0 3px 0 6px;
+}
+.v-select[dir="rtl"] .vs__clear {
+    margin-left: 6px;
+    margin-right: 0;
+}
+.v-select[dir="rtl"] .vs__deselect {
+    margin-left: 0;
+    margin-right: 2px;
+}
+.v-select[dir="rtl"] .vs__dropdown-menu {
+    text-align: right;
+}
+.vs__dropdown-toggle {
+    @apply flex px-2 pt-1 pb-2 whitespace-normal transition bg-gray-100 border appearance-none focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white;
+}
+.vs__selected-options {
+    display: flex;
+    flex-basis: 100%;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding: 0 2px;
+    position: relative;
+}
+.vs__actions {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px 0 3px;
+}
+.vs--searchable .vs__dropdown-toggle {
+    @apply cursor-text;
+}
+.vs--unsearchable .vs__dropdown-toggle {
+    @apply cursor-pointer;
+}
+.vs--open .vs__dropdown-toggle {
+    @apply rounded-b-none border-b-transparent;
+    border-bottom-color: transparent;
+}
+.vs__open-indicator {
+    @apply transition fill-gray-400;
+}
+.vs--open .vs__open-indicator {
+    @apply scale-100 rotate-180;
+}
+.vs--loading .vs__open-indicator {
+    @apply opacity-0;
+}
+.vs__clear {
+    @apply mr-2 cursor-pointer fill-gray-400;
+}
+.vs__dropdown-menu {
+    @apply box-border absolute left-0 z-50 block w-full overflow-y-auto bg-white border max-h-80 rounded-b-xl dark:bg-gray-800 dark:border-gray-700 dark:text-white;
+    top: calc(100% - 1px);
+}
+.vs__no-options {
+    @apply text-center;
+}
+.vs__dropdown-option {
+    @apply block clear-both px-4 py-2 text-black cursor-pointer whitespace-nowrap dark:text-white;
+}
+.vs__dropdown-option--highlight {
+    @apply text-white bg-black;
+}
+.vs__dropdown-option--deselect {
+    @apply text-white bg-red-800;
+}
+.vs__dropdown-option--disabled {
+    @apply text-opacity-50 bg-inherit;
+    cursor: inherit;
+}
+.vs__selected {
+    @apply z-0 flex items-center px-2 mx-1 mt-1 bg-gray-200 border border-gray-300 rounded-xl dark:bg-gray-800 dark:border-gray-700;
+}
+.vs__deselect {
+    @apply inline-flex ml-2 appearance-none cursor-pointer fill-gray-400;
+}
+.vs--single .vs__selected {
+    @apply bg-transparent border-transparent;
+}
+.vs--single.vs--loading .vs__selected,
+.vs--single.vs--open .vs__selected {
+    @apply absolute opacity-40;
+}
+.vs--single.vs--searching .vs__selected {
+    @apply hidden;
+}
+.vs__search::-webkit-search-cancel-button {
+    @apply hidden;
+}
+.vs__search::-ms-clear,
+.vs__search::-webkit-search-decoration,
+.vs__search::-webkit-search-results-button,
+.vs__search::-webkit-search-results-decoration {
+    @apply hidden;
+}
+.vs__search,
+.vs__search:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    line-height: 1.4;
+    font-size: 1em;
+    border: 1px solid transparent;
+    border-left: none;
+    outline: none;
+    margin: 4px 0 0;
+    padding: 0 7px;
+    background: none;
+    box-shadow: none;
+    width: 0;
+    max-width: 100%;
+    flex-grow: 1;
+    z-index: 1;
+}
+.vs__search::-webkit-input-placeholder {
+    @apply text-inherit;
+}
+.vs__search::-moz-placeholder {
+    @apply text-inherit;
+}
+.vs__search:-ms-input-placeholder {
+    @apply text-inherit;
+}
+.vs__search::-ms-input-placeholder {
+    @apply text-inherit;
+}
+.vs__search::placeholder {
+    @apply text-inherit;
+}
+.vs--unsearchable .vs__search {
+    @apply opacity-100;
+}
+.vs--unsearchable:not(.vs--disabled) .vs__search {
+    @apply cursor-pointer;
+}
+.vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search {
+    @apply opacity-20;
+}
+.vs__spinner {
+    align-self: center;
+    opacity: 0;
+    font-size: 5px;
+    text-indent: -9999em;
+    overflow: hidden;
+    border: 0.9em solid hsla(0, 0%, 39.2%, 0.1);
+    border-left-color: rgba(60, 60, 60, 0.45);
+    transform: translateZ(0);
+    -webkit-animation: vSelectSpinner 1.1s linear infinite;
+    animation: vSelectSpinner 1.1s linear infinite;
+    transition: opacity 0.1s;
+}
+.vs__spinner,
+.vs__spinner:after {
+    border-radius: 50%;
+    width: 5em;
+    height: 5em;
+}
+.vs--loading .vs__spinner {
+    @apply opacity-100;
 }

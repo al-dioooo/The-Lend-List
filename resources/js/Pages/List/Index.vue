@@ -6,9 +6,9 @@
             <div class="m-10 space-y-8">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-4">
-                        <input type="text" placeholder="Search" v-model="params.search" autocomplete="off" class="px-4 py-2 transition bg-gray-100 border focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200"/>
+                        <input type="text" placeholder="Search" v-model="params.search" autocomplete="off" class="px-4 py-2 transition bg-gray-100 border border-gray-200 focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white"/>
                         <transition name="pop">
-                            <div v-if="params.search" @click="reset" class="transition cursor-pointer active:hover:scale-95">
+                            <div v-if="params.search" @click="reset" class="transition cursor-pointer active:hover:scale-95 dark:text-white">
                                 Reset
                             </div>
                         </transition>
@@ -18,24 +18,23 @@
                         <create :item="item" :borrower="borrower" />
                     </div>
                 </div>
-                {{$props.message}}
                 <table
-                    class="min-w-full overflow-hidden divide-y divide-gray-200 shadow rounded-xl">
-                    <thead class="bg-gray-50">
+                    class="min-w-full overflow-hidden divide-y divide-gray-200 shadow dark:divide-gray-700 rounded-xl">
+                    <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-300">
                                 Item
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-300">
                                 Borrower
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-300">
                                 Status
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-300">
                                 Borrowed At
                             </th>
-                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase ">
+                            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-300">
                                 Returned At
                             </th>
                             <th scope="col" class="relative px-6 py-3">
@@ -43,7 +42,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-800 dark:bg-gray-900">
                         <tr class="text-center" v-if="result == 0 && route().params.search == null">
                             <td colspan="7" class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                                 No list available
@@ -58,17 +57,20 @@
 
                         <tr v-for="datasheet in datasheet.data" :key="datasheet.id">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <!-- <div class="text-sm font-medium text-gray-900 overflow-ellipsis">
-                                    {{datasheet.items}}
-                                </div> -->
-                                <div class="overflow-hidden text-sm text-gray-500 w-44 overflow-ellipsis" v-if="datasheet.items">
-                                    <template v-for="item in datasheet.items" :key="item.id">
-                                        {{item.name}}
-                                    </template>
+                                <div class="text-sm font-medium text-gray-900 overflow-ellipsis dark:text-white">
+                                    {{ datasheet.unique_id }}
+                                </div>
+                                <div class="space-x-1 overflow-hidden text-sm text-gray-500 w-44 overflow-ellipsis" v-if="datasheet.items">
+                                    <span>
+                                        {{ datasheet.items[0].name }}
+                                    </span>
+                                    <span v-if="datasheet.items.length > 1" class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
+                                        {{ (datasheet.items.length - 1) + '+' }}
+                                    </span>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="overflow-hidden text-sm font-medium text-gray-900 overflow-ellipsis">
+                                <div class="overflow-hidden text-sm font-medium text-gray-900 overflow-ellipsis dark:text-white">
                                     {{datasheet.borrower.name}}
                                 </div>
                                 <div class="overflow-hidden text-sm text-gray-500 overflow-ellipsis">
@@ -76,18 +78,18 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span v-if="datasheet.is_returned != null" class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                <span v-if="datasheet.is_returned != 0" class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                                     Returned
                                 </span>
-                                <span v-if="datasheet.is_returned == null" class="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
+                                <span v-if="datasheet.is_returned == 0" class="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
                                     Borrowed
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                {{datasheet.borrowed_at}}
+                                {{ datasheet.borrowed_at }}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                {{datasheet.is_returned != null ? datasheet.returned_at : 'Not returned yet'}}
+                                {{ datasheet.is_returned != 0 ? datasheet.returned_at : 'Not returned yet' }}
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <inertia-link :href="route('data-list.show', datasheet)" class="inline-flex items-center p-2 space-x-4 text-white transition bg-gray-800 rounded-full active:hover:scale-90">

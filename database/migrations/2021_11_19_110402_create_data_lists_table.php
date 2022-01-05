@@ -15,8 +15,11 @@ class CreateDataListsTable extends Migration
     {
         Schema::create('data_lists', function (Blueprint $table) {
             $table->id();
+            $table->string('unique_id', 50)->unique();
             $table->foreignId('borrower_id')->constrained()->cascadeOnDelete();
             $table->text('note')->nullable();
+            $table->string('accepted_by')->nullable();
+            $table->boolean('is_returned')->default(0);
             $table->timestamps();
             $table->timestamp('borrowed_at')->useCurrent();
             $table->timestamp('returned_at')->nullable();

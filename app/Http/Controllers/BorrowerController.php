@@ -15,7 +15,7 @@ class BorrowerController extends Controller
      */
     public function index()
     {
-        $borrower = Borrower::filter(request()->only('search', 'trashed'))->latest()->paginate(10)->withQueryString();
+        $borrower = Borrower::filter(request()->only('search', 'trashed'))->latest()->paginate(20)->withQueryString();
 
         $data = [
             'datasheet' => $borrower,

@@ -8,84 +8,80 @@
                     <div class="md:grid md:grid-cols-3 md:gap-6">
                         <div class="md:col-span-1">
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ datasheet.note }}</h3>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Unique ID {{ datasheet.unique_id }}</h3>
                                 <p class="mt-1 text-sm text-gray-600"> Edit data carefully. </p>
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <div class="shadow">
-                                <div class="px-4 py-5 bg-white sm:p-6">
-                                    <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Item</label>
-                                            <v-select v-model="form.item" :filterable="false" @search="searchItem" multiple :reduce="item => item.id" :options="item" label="name" class="mt-1">
-                                                <template v-slot:option="{name, description}">
-                                                    <div>{{ name }}</div>
-                                                    <cite>{{ description }}</cite>
-                                                </template>
-                                            </v-select>
-                                            <input-error :message="form.errors.item" class="mt-1" />
+                            <div class="overflow-hidden shadow sm:rounded-md">
+                                <div class="px-4 py-5 space-y-6 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <fieldset>
+                                        <legend class="text-base font-medium text-gray-900 dark:text-white">Statuses</legend>
+                                        <div class="mt-4">
+                                            <div class="flex items-start">
+                                                <div class="flex items-center h-5">
+                                                    <input id="is_returned" name="is_returned" type="checkbox" v-model="form.is_returned" class="w-4 h-4 text-gray-700 transition bg-gray-200 border-transparent rounded focus:border-transparent focus:ring focus:ring-offset-0 focus:ring-gray-500" />
+                                                </div>
+                                                <div class="ml-3 text-sm">
+                                                    <label for="is_returned"
+                                                        class="font-medium text-gray-700 dark:text-gray-400">Is Returned</label>
+                                                    <p class="text-gray-500">Check if the item has returned.</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Borrower</label>
-                                            <v-select v-model="form.borrower" :value="datasheet.borrower" :filterable="false" @search="searchBorrower" :reduce="borrower => borrower.id" :options="borrower" label="name" class="mt-1">
-                                                <template v-slot:option="{name, email}">
-                                                    <div>{{ name }}</div>
-                                                    <cite>{{ email }}</cite>
-                                                </template>
-                                            </v-select>
-                                            <input-error :message="form.errors.borrower" class="mt-1" />
+                                        <div class="grid grid-cols-6 gap-6 mt-4" v-if="form.is_returned">
+                                            <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                                                <label for="returned_at"
+                                                    class="block text-sm font-medium text-gray-700 dark:text-gray-400">Returned At</label>
+                                                    <input type="date" id="returned_at" class="block w-full px-4 py-2 mt-1 transition bg-gray-100 border border-gray-200 focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white">
+                                                <input-error :message="form.errors.returned_at" class="mt-1" />
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label for="accepted_by"
+                                                    class="block text-sm font-medium text-gray-700 dark:text-gray-400">Accepted By</label>
+                                                <input v-model="form.accepted_by" id="accepted_by" autocomplete="off" type="text" class="block w-full px-4 py-2 mt-1 transition bg-gray-100 border border-gray-200 focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white">
+                                                <input-error :message="form.errors.accepted_by" class="mt-1" />
+                                            </div>
                                         </div>
-                                        <div class="col-span-6">
-                                            <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                                            <textarea v-model="form.note" id="note" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm" />
-                                            <input-error :message="form.errors.note" class="mt-1" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                            <label for="city"
-                                                class="block text-sm font-medium text-gray-700">Borrowed At</label>
-                                            <date-picker :disabled="true" inputFormat="dd-MM-yyyy" v-model="form.borrowed" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                            <label for="city"
-                                                class="block text-sm font-medium text-gray-700">Returned At</label>
-                                            <date-picker v-model="form.returned" inputFormat="dd-MM-yyyy" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                            <label for="region"
-                                                class="block text-sm font-medium text-gray-700">State / Province</label>
-                                            <t-rich-select :options="options" v-model="form.returned_by">
-                                                <template v-slot:option="{ isHighlighted, isSelected, className, option, query }">
-                                                    <li :class="[className ? 'text-white bg-gray-800' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-3 pr-9 rounded-md']">
-                                                        <div class="flex flex-col">
-                                                            <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">
-                                                            {{ option.raw.name }}
-                                                            </span>
-                                                            <span class="text-gray-500">
-                                                            {{ option.raw.description }}
-                                                            </span>
-                                                        </div>
+                                    </fieldset>
 
-                                                        <span v-if="isSelected" :class="[isHighlighted ? 'text-white' : 'text-grey-800', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                            </svg>
-                                                        </span>
-                                                    </li>
-                                                </template>
-                                            </t-rich-select>
+                                    <fieldset>
+                                        <div>
+                                            <legend class="text-base font-medium text-gray-900 dark:text-white">Data</legend>
+                                            <p class="text-sm text-gray-500">These are item and borrower that contains on datasheet.
+                                            </p>
                                         </div>
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                            <label for="postal-code"
-                                                class="block text-sm font-medium text-gray-700">Returned By</label>
-                                            <input v-model="form.returned_by" id="returned_by" autocomplete="off" type="text" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm">
+                                        <div class="grid grid-cols-6 gap-6 mt-4">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Item</label>
+                                                <v-select v-model="form.item" :filterable="false" @search="searchItem" multiple :reduce="item => item.id" :options="item" label="name" class="mt-1">
+                                                    <template v-slot:option="{name, description}">
+                                                        <div>{{ name }}</div>
+                                                        <div class="text-xs opacity-50">{{ description }}</div>
+                                                    </template>
+                                                </v-select>
+                                                <input-error :message="form.errors.item" class="mt-1" />
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Borrower</label>
+                                                <v-select v-model="form.borrower" :value="datasheet.borrower" :filterable="false" @search="searchBorrower" :reduce="borrower => borrower.id" :options="borrower" label="name" class="mt-1">
+                                                    <template v-slot:option="{name, email}">
+                                                        <div>{{ name }}</div>
+                                                        <div class="text-xs opacity-50">{{ email }}</div>
+                                                    </template>
+                                                </v-select>
+                                                <input-error :message="form.errors.borrower" class="mt-1" />
+                                            </div>
+                                            <div class="col-span-6">
+                                                <label for="note" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Note</label>
+                                                <textarea v-model="form.note" id="note" rows="8" class="block w-full px-4 py-2 mt-1 transition bg-gray-100 border border-gray-200 focus:outline-none rounded-xl focus:border-gray-400 focus:ring focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-gray-600 dark:text-white" />
+                                                <input-error :message="form.errors.note" class="mt-1" />
+                                            </div>
                                         </div>
-                                    </div>
+                                    </fieldset>
                                 </div>
-                                <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
-                                    <button type="submit"
-                                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                        Save </button>
+                                <div class="px-4 py-3 text-right bg-gray-50 sm:px-6 dark:bg-black dark:bg-opacity-30">
+                                    <button type="submit" @click="update" class="px-4 py-2 text-white transition bg-gray-800 rounded-xl active:hover:scale-95">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -102,18 +98,13 @@ import AppLayout from '@/Shared/Layout/AppLayout'
 import Topbar from '@/Shared/Component/Topbar'
 import InputError from '@/Shared/Component/InputError'
 import VSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css'
-import DatePicker from 'vue3-datepicker'
-import { TRichSelect } from '@variantjs/vue'
 
 export default defineComponent({
     components: {
         AppLayout,
         Topbar,
         InputError,
-        VSelect,
-        DatePicker,
-        TRichSelect
+        VSelect
     },
 
     props: {
@@ -124,27 +115,13 @@ export default defineComponent({
         return {
             item: [],
             borrower: [],
-            options: [
-                {
-                    id: 1,
-                    name: 'Quercus sp.',
-                    description: 'BB. 01'
-                },
-
-                {
-                    id: 2,
-                    name: 'Eugenia sp.',
-                    description: 'BB. 02'
-                }
-            ],
-
             form: this.$inertia.form({
                 item: this.datasheet.items,
                 borrower: this.datasheet.borrower.id,
                 note: this.datasheet?.note,
-                borrowed: Date.parse(this.datasheet.borrowed_at),
-                returned: ref(new Date()),
-                returned_by: this.datasheet?.returned_by
+                is_returned: this.datasheet.is_returned == 1 ? true : false,
+                returned_at: this.datasheet.returned_at ? Date.parse(this.datasheet.returned_at) : ref(new Date()),
+                accepted_by: this.datasheet?.accepted_by
             })
         }
     },
@@ -156,9 +133,7 @@ export default defineComponent({
 
     methods: {
         update() {
-            this.form.patch(route('data-list.update'), {
-                onSuccess: () => this.closeModal()
-            })
+            this.form.put(route('data-list.update', this.datasheet))
         },
 
         searchBorrower(search) {

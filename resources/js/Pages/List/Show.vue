@@ -3,77 +3,157 @@
         <topbar title="Data Detail" />
 
         <div class="overflow-y-auto">
-            <div class="m-10">
-                <div>
+            <div class="m-10 divide-y dark:divide-gray-700">
+                <div class="pb-8">
                     <div class="md:grid md:grid-cols-3 md:gap-6">
                         <div class="md:col-span-1">
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ datasheet.note }}</h3>
-                                <p class="mt-1 text-sm text-gray-600"> Use a permanent address where you can receive mail. </p>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Data</h3>
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
                             <div class="overflow-hidden shadow sm:rounded-md">
-                                <div class="px-4 py-5 bg-white sm:p-6">
-                                    <div class="grid grid-cols-6 gap-6">
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Item</label>
-                                            <v-select v-model="form.item" :filterable="false" @search="searchItem" multiple :reduce="item => item.id" :options="item" label="name" class="mt-1">
-                                                <template v-slot:option="{name, description}">
-                                                    <div>{{ name }}</div>
-                                                    <cite>{{ description }}</cite>
-                                                </template>
-                                            </v-select>
-                                            <input-error :message="form.errors.item" class="mt-1" />
+                                <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <div class="flex flex-col divide-y dark:divide-gray-700">
+                                        <div class="pb-2">
+                                            <div class="font-medium">
+                                                Unique ID
+                                            </div>
+                                            <div class="text-gray-500">
+                                                {{ datasheet.unique_id }}
+                                            </div>
                                         </div>
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Borrower</label>
-                                            <v-select v-model="form.borrower" :value="datasheet.borrower" :filterable="false" @search="searchBorrower" :reduce="borrower => borrower.id" :options="borrower" label="name" class="mt-1">
-                                                <template v-slot:option="{name, email}">
-                                                    <div>{{ name }}</div>
-                                                    <cite>{{ email }}</cite>
-                                                </template>
-                                            </v-select>
-                                            <input-error :message="form.errors.borrower" class="mt-1" />
-                                        </div>
-                                        <div class="col-span-6">
-                                            <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                                            <textarea v-model="form.note" id="note" class="block w-full px-4 py-2 mt-1 transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-60 focus:ring-blue-300 focus:border-blue-500 sm:text-sm" />
-                                            <input-error :message="form.errors.note" class="mt-1" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                            <label for="city"
-                                                class="block text-sm font-medium text-gray-700">City</label>
-                                            <input type="text"
-                                                name="city"
-                                                id="city"
-                                                autocomplete="address-level2"
-                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                            <label for="region"
-                                                class="block text-sm font-medium text-gray-700">State / Province</label>
-                                            <input type="text"
-                                                name="region"
-                                                id="region"
-                                                autocomplete="address-level1"
-                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
-                                        </div>
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                            <label for="postal-code"
-                                                class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
-                                            <input type="text"
-                                                name="postal-code"
-                                                id="postal-code"
-                                                autocomplete="postal-code"
-                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+
+                                        <div class="pt-2">
+                                            <div class="font-medium">
+                                                Note
+                                            </div>
+                                            <div class="text-gray-500">
+                                                {{ datasheet.note }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-4 py-3 text-right bg-gray-50 sm:px-6">
-                                    <button type="submit"
-                                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                        Save </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="py-8">
+                    <div class="md:grid md:grid-cols-3 md:gap-6">
+                        <div class="md:col-span-1">
+                            <div class="px-4 sm:px-0">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Items</h3>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"> List of items. </p>
+                            </div>
+                        </div>
+                        <div class="mt-5 md:mt-0 md:col-span-2">
+                            <div class="overflow-hidden shadow sm:rounded-md">
+                                <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <div class="flex flex-col divide-y dark:divide-gray-700">
+                                        <template v-for="(row, index) in datasheet.items" :key="row.id">
+                                            <div :class="index == 0 ? 'pb-2' : index == datasheet.items.length -1 ? 'pt-2' : 'py-2'">
+                                                <div class="font-medium">
+                                                    {{ row.name }}
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    {{ row.description }}
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="py-8">
+                    <div class="md:grid md:grid-cols-3 md:gap-6">
+                        <div class="md:col-span-1">
+                            <div class="px-4 sm:px-0">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Borrower</h3>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"> The borrower of item. </p>
+                            </div>
+                        </div>
+                        <div class="mt-5 md:mt-0 md:col-span-2">
+                            <div class="overflow-hidden shadow sm:rounded-md">
+                                <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <div class="flex flex-col">
+                                        <div>
+                                            <div class="font-medium">
+                                                {{ datasheet.borrower.name }}
+                                            </div>
+                                            <div class="text-gray-500">
+                                                {{ datasheet.borrower.email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="py-8">
+                    <div class="md:grid md:grid-cols-3 md:gap-6">
+                        <div class="md:col-span-1">
+                            <div class="px-4 sm:px-0">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Timestamp</h3>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400"> The timestamp of data. </p>
+                            </div>
+                        </div>
+                        <div class="mt-5 md:mt-0 md:col-span-2">
+                            <div class="overflow-hidden shadow sm:rounded-md">
+                                <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <div class="flex flex-col divide-y dark:divide-gray-700">
+                                        <div class="pb-2">
+                                            <div class="font-medium">
+                                                Borrowed At
+                                            </div>
+                                            <div class="text-gray-500">
+                                                {{ datasheet.borrowed_at }}
+                                            </div>
+                                        </div>
+
+                                        <div class="py-2">
+                                            <div class="font-medium">
+                                                Returned At
+                                            </div>
+                                            <div class="text-gray-500">
+                                                {{ datasheet.returned_at ? datasheet.returned_at + ' by ' + datasheet.accepted_by : 'Not returned yet' }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <div class="md:grid md:grid-cols-3 md:gap-6">
+                        <div class="md:col-span-1">
+                            <div class="px-4 sm:px-0">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Actions</h3>
+                            </div>
+                        </div>
+                        <div class="mt-5 md:mt-0 md:col-span-2">
+                            <div class="overflow-hidden shadow sm:rounded-md">
+                                <div class="px-4 py-5 bg-white sm:p-6 dark:bg-gray-900 dark:text-white">
+                                    <div class="flex flex-col divide-y dark:divide-gray-700">
+                                        <div class="pb-4">
+                                            <inertia-link :href="route('data-list.edit', datasheet)" class="px-4 py-2 text-white transition bg-gray-800 rounded-xl active:hover:scale-95">
+                                                Edit data
+                                            </inertia-link>
+                                        </div>
+
+                                        <div class="pt-2">
+                                            <button @click="destroy(datasheet)" class="px-4 py-2 text-white transition bg-red-800 rounded-xl active:hover:scale-95">
+                                                Delete data
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,23 +161,24 @@
                 </div>
             </div>
         </div>
+
+        <delete :datasheet="modalData" :show="isOpen" @close="closeModal" />
     </app-layout>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import AppLayout from '@/Shared/Layout/AppLayout'
 import Topbar from '@/Shared/Component/Topbar'
-import InputError from '@/Shared/Component/InputError'
-import VSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css'
+import Delete from '@/Pages/List/Delete'
+import { InertiaLink } from '@inertiajs/inertia-vue3'
 
 export default defineComponent({
     components: {
         AppLayout,
         Topbar,
-        InputError,
-        VSelect
+        Delete,
+        InertiaLink
     },
 
     props: {
@@ -106,55 +187,24 @@ export default defineComponent({
 
     data() {
         return {
-            item: [],
-            borrower: [],
-
             form: this.$inertia.form({
-                item: this.datasheet.items,
-                borrower: this.datasheet.borrower.id,
-                note: this.datasheet?.note
-            })
+                is_returned: false,
+                accepted_by: null
+            }),
+
+            modalData: null,
+            isOpen: ref(false)
         }
     },
 
-    created() {
-        this.getItem()
-        this.getBorrower()
-    },
-
     methods: {
-        update() {
-            this.form.patch(route('data-list.update'), {
-                onSuccess: () => this.closeModal()
-            })
+        destroy(data) {
+            this.modalData = data
+            this.isOpen = true
         },
 
-        searchBorrower(search) {
-            this.getBorrower(search)
-        },
-
-        searchItem(search) {
-            this.getItem(search)
-        },
-
-        getBorrower(query) {
-            axios.get(route('api.borrower', {
-                search: query
-            })).then(response => {
-                this.borrower = response.data
-            }).catch(error => {
-                console.log(error)
-            })
-        },
-
-        getItem(query) {
-            axios.get(route('api.item', {
-                search: query
-            })).then(response => {
-                this.item = response.data
-            }).catch(error => {
-                console.log(error)
-            })
+        closeModal() {
+            this.isOpen = false
         }
     }
 })

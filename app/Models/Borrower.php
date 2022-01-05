@@ -29,12 +29,6 @@ class Borrower extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('name', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->orWhere('contact', 'like', '%' . $search . '%')->orWhere('organization', 'like', '%' . $search . '%')->orWhere('address', 'like', '%' . $search . '%');
-        })->when($filters['trashed'] ?? null, function ($query, $trashed) {
-            if ($trashed === 'with') {
-                $query->withTrashed();
-            } elseif ($trashed === 'only') {
-                $query->onlyTrashed();
-            }
         });
     }
 }

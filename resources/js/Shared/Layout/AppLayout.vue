@@ -1,22 +1,20 @@
 <template>
-    <div class="flex h-screen overflow-hidden bg-gray-100">
+    <div class="flex h-screen overflow-hidden bg-gray-100 dark:bg-black">
         <Head :title="title"></Head>
         <sidebar />
 
-        <div class="flex flex-col flex-1 w-full overflow-hidden bg-white rounded-tl-3xl rounded-bl-3xl shadow-left">
+        <div class="flex flex-col flex-1 w-full overflow-hidden bg-white dark:bg-opacity-10 rounded-tl-3xl rounded-bl-3xl shadow-left">
             <banner />
             <slot/>
         </div>
     </div>
-
-    <slot name="modal" />
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { defineComponent } from "vue"
+import { Head } from "@inertiajs/inertia-vue3"
 import Sidebar from '@/Shared/Component/Sidebar'
-import Banner from "@/Shared/Component/Banner.vue";
+import Banner from "@/Shared/Component/Banner.vue"
 
 export default defineComponent({
     components: {

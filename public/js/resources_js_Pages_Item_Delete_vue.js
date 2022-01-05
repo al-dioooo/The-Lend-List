@@ -2491,6 +2491,9 @@ var _hoisted_1 = {
   "class": "mt-8 space-y-2"
 };
 var _hoisted_2 = {
+  "class": "dark:text-white"
+};
+var _hoisted_3 = {
   "class": "mt-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2502,14 +2505,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     show: _ctx.isOpen
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, " Are you sure want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.datasheet.name) + "? ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, " Are you sure want to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.datasheet.name) + "? ", 1
       /* TEXT */
-      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         onClick: _cache[0] || (_cache[0] = function () {
           return _ctx.destroy && _ctx.destroy.apply(_ctx, arguments);
         }),
         type: "button",
-        "class": "inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+        "class": "px-4 py-2 text-white transition bg-gray-800 rounded-xl active:hover:scale-95"
       }, " Delete ")])];
     }),
     _: 1
@@ -2549,7 +2552,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_4 = {
-  "class": "inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl"
+  "class": "inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl dark:bg-gray-900"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_DialogOverlay = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DialogOverlay");
@@ -2600,7 +2603,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DialogTitle, {
-                "class": "text-2xl font-medium leading-6 text-gray-900"
+                "class": "text-2xl font-medium leading-6 text-gray-900 dark:text-gray-50"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                   return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
@@ -2665,13 +2668,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Delete_vue_vue_type_template_id_145429ae__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Delete.vue?vue&type=template&id=145429ae */ "./resources/js/Pages/Item/Delete.vue?vue&type=template&id=145429ae");
 /* harmony import */ var _Delete_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Delete.vue?vue&type=script&lang=js */ "./resources/js/Pages/Item/Delete.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Al_Documents_Website_The_Lend_List_Dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_Al_Documents_Website_The_Lend_List_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Al_Documents_Website_The_Lend_List_Dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Delete_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Delete_vue_vue_type_template_id_145429ae__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Item/Delete.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_Al_Documents_Website_The_Lend_List_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Delete_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Delete_vue_vue_type_template_id_145429ae__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Item/Delete.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -2692,13 +2695,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Modal_vue_vue_type_template_id_490bbccf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal.vue?vue&type=template&id=490bbccf */ "./resources/js/Shared/Component/Modal.vue?vue&type=template&id=490bbccf");
 /* harmony import */ var _Modal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.vue?vue&type=script&lang=js */ "./resources/js/Shared/Component/Modal.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Al_Documents_Website_The_Lend_List_Dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_Al_Documents_Website_The_Lend_List_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Al_Documents_Website_The_Lend_List_Dashboard_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Modal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Modal_vue_vue_type_template_id_490bbccf__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/Component/Modal.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_Al_Documents_Website_The_Lend_List_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Modal_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Modal_vue_vue_type_template_id_490bbccf__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/Component/Modal.vue"]])
 /* hot reload */
 if (false) {}
 
